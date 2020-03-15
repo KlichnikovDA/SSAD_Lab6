@@ -60,21 +60,21 @@ namespace Lab6
         {
             Components = new List<Component>();
             int id = 0;
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 0, 0));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 0, 1));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 0, 2));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 1, 0));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 1, 1));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 1, 2));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 2, 0));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 2, 1));
-            Components.Add(new Sensor(id++, "Сенсор", DateTime.Now, 2, 2));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 0, 0));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 0, 1));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 1, 0));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 1, 1));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 2, 0));
-            Components.Add(new Actuator(id++, "Исполнительный механизм", DateTime.Now, 2, 1));
+            Components.Add(new Sensor(id++, "Sensor", 0, 0));
+            Components.Add(new Sensor(id++, "Sensor", 0, 1));
+            Components.Add(new Sensor(id++, "Sensor", 0, 2));
+            Components.Add(new Sensor(id++, "Sensor", 1, 0));
+            Components.Add(new Sensor(id++, "Sensor", 1, 1));
+            Components.Add(new Sensor(id++, "Sensor", 1, 2));
+            Components.Add(new Sensor(id++, "Sensor", 2, 0));
+            Components.Add(new Sensor(id++, "Sensor", 2, 1));
+            Components.Add(new Sensor(id++, "Sensor", 2, 2));
+            Components.Add(new Actuator(id++, "Actuator", 0, 0));
+            Components.Add(new Actuator(id++, "Actuator", 0, 1));
+            Components.Add(new Actuator(id++, "Actuator", 1, 0));
+            Components.Add(new Actuator(id++, "Actuator", 1, 1));
+            Components.Add(new Actuator(id++, "Actuator", 2, 0));
+            Components.Add(new Actuator(id++, "Actuator", 2, 1));
         }
     }
 
@@ -83,18 +83,16 @@ namespace Lab6
     {
         public int ID { get; set; }
         protected string ComponentType { get; set; }
-        protected DateTime Time { get; set; }
 
-        public Component(int Id, string Type, DateTime Time)
+        public Component(int Id, string Type)
         {
             this.ID = Id;
             this.ComponentType = Type;
-            this.Time = Time;
         }
 
         public virtual void GetInfo()
         {
-            Console.WriteLine(ID + ' ' + ComponentType + ' ' + Time);
+            Console.WriteLine(ID + ' ' + ComponentType);
         }
     }
 
@@ -120,14 +118,14 @@ namespace Lab6
         SensorTypes SensorType { get; set; }
         SensorValues SignalValue { get; set; }
 
-        public Sensor(int Id, string Type, DateTime Time, byte Sensor, byte Value) : base(Id, Type, Time)
+        public Sensor(int Id, string Type, byte Sensor, byte Value) : base(Id, Type)
         {
             SensorType = (SensorTypes)Sensor;
             SignalValue = (SensorValues)Value;
         }
         public override void GetInfo()
         {
-            Console.WriteLine("{0}: {1} {2} {3} = {4}", Time, SensorType, ComponentType, ID, SignalValue);
+            Console.WriteLine("{0} {1} {2} = {3}", SensorType, ComponentType, ID, SignalValue);
         }
     }
 
@@ -152,14 +150,14 @@ namespace Lab6
         ActuatorTypes ActuatorType { get; set; }
         ActuatorValues ActuatorValue { get; set; }
 
-        public Actuator(int Id, string Type, DateTime Time, byte Actuator, byte Value) : base(Id, Type, Time)
+        public Actuator(int Id, string Type, byte Actuator, byte Value) : base(Id, Type)
         {
             ActuatorType = (ActuatorTypes)Actuator;
             ActuatorValue = (ActuatorValues)Value;
         }
         public override void GetInfo()
         {
-            Console.WriteLine("{0}: {1} {2} {3} = {4}", Time, ActuatorType, ComponentType, ID, ActuatorValue);
+            Console.WriteLine("{0} {1} {2} = {3}", ActuatorType, ComponentType, ID, ActuatorValue);
         }
     }
 }
